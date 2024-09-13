@@ -17,9 +17,9 @@ export default function Home() {
             <Link href="/login" className="hover:text-gray-300">
               Log in
             </Link>
-            <ShimmerButton shimmerColor="#ffffff" background="rgba(0, 0, 0, 1)">
-              <Link href="/signup">Sign up</Link>
-            </ShimmerButton>
+            {/* <ShimmerButton shimmerColor="#ffffff" background="rgba(0, 0, 0, 1)"> */}
+            <Link href="/signup">Sign up</Link>
+            {/* </ShimmerButton> */}
           </div>
         </div>
       </header>
