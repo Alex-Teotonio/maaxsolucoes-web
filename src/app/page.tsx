@@ -1,6 +1,7 @@
 import BlurIn from "@/components/magicui/blur-in";
 import TypingAnimation from "@/components/magicui/typing-animation";
 import ShimmerButton from "@/components/magicui/shimmer-button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -13,11 +14,11 @@ export default function Home() {
 
           {/* Links de navegação */}
           <div className="flex items-center space-x-4">
-            <a href="#" className="hover:text-gray-300">
+            <Link href="/login" className="hover:text-gray-300">
               Log in
-            </a>
+            </Link>
             <ShimmerButton shimmerColor="#ffffff" background="rgba(0, 0, 0, 1)">
-              Sign up
+              <Link href="/signup">Sign up</Link>
             </ShimmerButton>
           </div>
         </div>
@@ -41,11 +42,6 @@ export default function Home() {
           text={"Cadastre produtos, venda com segurança e otimize seu tempo."}
           duration={100}
         />
-
-        {/* Shimmer Button adicional para ação */}
-        <ShimmerButton shimmerColor="#00FF00" background="rgba(0, 0, 0, 0.8)">
-          Saiba Mais
-        </ShimmerButton>
       </main>
     </div>
   );
