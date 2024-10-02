@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -37,10 +39,9 @@ const Login = () => {
               <label htmlFor="email" className="block text-sm font-bold mb-2">
                 Email
               </label>
-              <input
+              <Input
                 id="email"
                 type="email"
-                className="w-full px-3 py-2 text-black rounded"
                 placeholder="Digite seu email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -53,23 +54,21 @@ const Login = () => {
               >
                 Senha
               </label>
-              <input
+              <Input
                 id="password"
                 type="password"
-                className="w-full px-3 py-2 text-black rounded"
                 placeholder="Digite sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
+              <Button type="submit" variant="secondary">
                 Entrar
-              </button>
-              <Link href="/signup">Criar uma conta</Link>
+              </Button>
+              <Link href="/signup" className="text-blue-500 hover:underline">
+                Criar uma conta
+              </Link>
             </div>
           </form>
         </div>

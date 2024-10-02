@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -54,11 +56,10 @@ const Signup = () => {
               <label htmlFor="name" className="block text-sm font-bold mb-2">
                 Nome Completo
               </label>
-              <input
+              <Input
                 id="name"
                 name="name"
                 type="text"
-                className="w-full px-3 py-2 text-black rounded"
                 placeholder="Digite seu nome"
                 value={formData.name}
                 onChange={handleChange}
@@ -68,11 +69,10 @@ const Signup = () => {
               <label htmlFor="email" className="block text-sm font-bold mb-2">
                 Email
               </label>
-              <input
+              <Input
                 id="email"
                 name="email"
                 type="email"
-                className="w-full px-3 py-2 text-black rounded"
                 placeholder="Digite seu email"
                 value={formData.email}
                 onChange={handleChange}
@@ -85,11 +85,10 @@ const Signup = () => {
               >
                 Senha
               </label>
-              <input
+              <Input
                 id="password"
                 name="password"
                 type="password"
-                className="w-full px-3 py-2 text-black rounded"
                 placeholder="Digite sua senha"
                 value={formData.password}
                 onChange={handleChange}
@@ -102,24 +101,22 @@ const Signup = () => {
               >
                 Confirmar Senha
               </label>
-              <input
+              <Input
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
-                className="w-full px-3 py-2 text-black rounded"
                 placeholder="Confirme sua senha"
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
             </div>
             <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                className=" hover:bg-black-700 text-white font-bold py-2 px-4 rounded"
-              >
+              <Button type="submit" className="w-full">
                 Cadastrar
-              </button>
-              <Link href="/login">Já tenho uma conta</Link>
+              </Button>
+              <Link href="/login" className="text-blue-500 hover:underline">
+                Já tenho uma conta
+              </Link>
             </div>
           </form>
         </div>
