@@ -7,6 +7,7 @@ import { firestore } from "../firebase-config"; // Importa o Firestore inicializ
 export const ContactForm: React.FC = () => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [telefone, setTelefone] = useState("");
   const [mensagem, setMensagem] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -16,6 +17,7 @@ export const ContactForm: React.FC = () => {
       await addDoc(collection(firestore, "contato"), {
         nome,
         email,
+        telefone, // Coletando o telefone também
         mensagem,
         timestamp: new Date(),
       });
@@ -23,6 +25,7 @@ export const ContactForm: React.FC = () => {
       alert("Mensagem enviada com sucesso!");
       setNome("");
       setEmail("");
+      setTelefone(""); // Limpando o campo telefone após envio
       setMensagem("");
     } catch (error) {
       console.error("Erro ao enviar mensagem: ", error);
@@ -33,11 +36,18 @@ export const ContactForm: React.FC = () => {
   return (
     <div className="w-full h-screen flex items-start justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <h2 className="mt-6 text-center text-3xl font-extrabold ">
+        <h2 className="mt-6 text-center text-3xl font-extrabold">
           Fale Conosco
         </h2>
+        <p className="text-center text-lg text-gray-100">
+          Quer descobrir como a Maax Soluções pode transformar seus eventos?{" "}
+          <br />
+          Entre em contato preenchendo o formulário abaixo, e nossa equipe
+          retornará em breve.
+        </p>
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="nome" className="sr-only">
                 Nome
@@ -49,7 +59,7 @@ export const ContactForm: React.FC = () => {
                 required
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Seu Nome"
               />
             </div>
@@ -64,8 +74,23 @@ export const ContactForm: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Seu E-mail"
+              />
+            </div>
+            <div>
+              <label htmlFor="telefone" className="sr-only">
+                Telefone
+              </label>
+              <input
+                id="telefone"
+                name="telefone"
+                type="text"
+                required
+                value={telefone}
+                onChange={(e) => setTelefone(e.target.value)}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Seu Telefone"
               />
             </div>
             <div>
@@ -78,7 +103,7 @@ export const ContactForm: React.FC = () => {
                 required
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Sua Mensagem"
               />
             </div>
