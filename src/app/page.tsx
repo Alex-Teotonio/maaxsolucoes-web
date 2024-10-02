@@ -1,48 +1,38 @@
-import BlurIn from "@/components/magicui/blur-in";
-import TypingAnimation from "@/components/magicui/typing-animation";
-import ShimmerButton from "@/components/magicui/shimmer-button";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 export default function Home() {
   return (
-    <div className="bg-black text-white min-h-screen">
-      {/* Header */}
-      <header className="bg-black text-white py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <div className="text-lg font-semibold">Maax Soluções</div>
-
-          {/* Links de navegação */}
+    <div className="bg-black text-white h-screen overflow-hidden flex flex-col">
+      <header className="bg-black text-white py-2 fixed top-0 left-0 w-full z-10">
+        <div className="w-full px-4 flex justify-between items-center">
+          <img src="/logo.jpg" className="w-20 h-30" />
           <div className="flex items-center space-x-4">
             <Link href="/login" className="hover:text-gray-300">
               Log in
             </Link>
-            {/* <ShimmerButton shimmerColor="#ffffff" background="rgba(0, 0, 0, 1)"> */}
             <Link href="/signup">Sign up</Link>
-            {/* </ShimmerButton> */}
           </div>
         </div>
       </header>
 
-      {/* Espaço entre o header e o conteúdo */}
-      <main className="flex flex-col justify-center items-center h-full mt-12 space-y-8">
-        {/* Título chamativo */}
-        <BlurIn word={"Inovação e eficiência em cada evento!"} />
-
-        {/* Animação de texto digitando */}
-        <TypingAnimation
-          className="text-xl"
-          text={"Soluções rápidas e confiáveis para o sucesso do seu evento"}
-          duration={150}
-        />
-
-        {/* Outra animação de texto digitando */}
-        <TypingAnimation
-          className="text-lg text-gray-400"
-          text={"Cadastre produtos, venda com segurança e otimize seu tempo."}
-          duration={100}
-        />
-      </main>
+      <div className="pt-12">
+        <Separator className="my-3.5 bg-gray-600" />
+      </div>
+      <div className="grid grid-cols-2 h-screen">
+        <div className="relative h-full flex justify-start items-start h-screen">
+          <img
+            src="/maax-background.jpg"
+            alt="Maax Soluções"
+            className="h-screen w-fit object-contain"
+          />
+        </div>
+        <div className="flex flex-col justify-center items-start h-full overflow-hidden">
+          <h3 className="text-4xl">
+            Tudo para seu Evento, em um só Aplicativo!
+          </h3>
+        </div>
+      </div>
     </div>
   );
 }
