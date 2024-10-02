@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { About } from "@/components/About";
-
+import { Services } from "@/components/Services";
+import { ContactForm } from "@/components/ContactForm";
 export default function Home() {
   return (
     <div className="bg-black text-white h-full overflow-hidden flex flex-col">
@@ -36,6 +37,8 @@ export default function Home() {
         </div>
       </div>
       <About />
+      <Services />
+      <ContactForm />
     </div>
   );
 }
