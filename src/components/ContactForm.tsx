@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore"; // Importa funções do Firestore
 import { firestore } from "../firebase-config"; // Importa o Firestore inicializado
+import { Input } from "@/components/ui/input"; // Importa o Input do shadcn
 
 export const ContactForm: React.FC = () => {
   const [nome, setNome] = useState("");
@@ -17,7 +18,7 @@ export const ContactForm: React.FC = () => {
       await addDoc(collection(firestore, "contato"), {
         nome,
         email,
-        telefone, // Coletando o telefone também
+        telefone,
         mensagem,
         timestamp: new Date(),
       });
@@ -25,7 +26,7 @@ export const ContactForm: React.FC = () => {
       alert("Mensagem enviada com sucesso!");
       setNome("");
       setEmail("");
-      setTelefone(""); // Limpando o campo telefone após envio
+      setTelefone("");
       setMensagem("");
     } catch (error) {
       console.error("Erro ao enviar mensagem: ", error);
@@ -39,7 +40,8 @@ export const ContactForm: React.FC = () => {
         <h2 className="mt-6 text-center text-3xl font-extrabold">
           Fale Conosco
         </h2>
-        <p className="text-center text-lg text-gray-100">
+
+        <p className="text-center text-lg text-gray-600">
           Quer descobrir como a Maax Soluções pode transformar seus eventos?{" "}
           <br />
           Entre em contato preenchendo o formulário abaixo, e nossa equipe
@@ -48,51 +50,55 @@ export const ContactForm: React.FC = () => {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
+            {/* Input para o Nome */}
             <div>
               <label htmlFor="nome" className="sr-only">
                 Nome
               </label>
-              <input
+              <Input
                 id="nome"
                 name="nome"
                 type="text"
                 required
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Seu Nome"
               />
             </div>
+
+            {/* Input para o Email */}
             <div>
               <label htmlFor="email" className="sr-only">
                 E-mail
               </label>
-              <input
+              <Input
                 id="email"
                 name="email"
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Seu E-mail"
               />
             </div>
+
+            {/* Input para o Telefone */}
             <div>
               <label htmlFor="telefone" className="sr-only">
                 Telefone
               </label>
-              <input
+              <Input
                 id="telefone"
                 name="telefone"
                 type="text"
                 required
                 value={telefone}
                 onChange={(e) => setTelefone(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Seu Telefone"
               />
             </div>
+
+            {/* Textarea para Mensagem */}
             <div>
               <label htmlFor="mensagem" className="sr-only">
                 Mensagem
@@ -103,7 +109,7 @@ export const ContactForm: React.FC = () => {
                 required
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Sua Mensagem"
               />
             </div>
