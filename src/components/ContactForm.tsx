@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore"; // Importa funções do Firestore
 import { firestore } from "../firebase-config"; // Importa o Firestore inicializado
 import { Input } from "@/components/ui/input"; // Importa o Input do shadcn
+import { Textarea } from "@/components/ui/textarea"; // Importa o Textarea do shadcn
 
 export const ContactForm: React.FC = () => {
   const [nome, setNome] = useState("");
@@ -41,7 +42,7 @@ export const ContactForm: React.FC = () => {
           Fale Conosco
         </h2>
 
-        <p className="text-center text-lg text-gray-600">
+        <p className="text-center text-lg text-gray-100">
           Quer descobrir como a Maax Soluções pode transformar seus eventos?{" "}
           <br />
           Entre em contato preenchendo o formulário abaixo, e nossa equipe
@@ -103,13 +104,12 @@ export const ContactForm: React.FC = () => {
               <label htmlFor="mensagem" className="sr-only">
                 Mensagem
               </label>
-              <textarea
+              <Textarea
                 id="mensagem"
                 name="mensagem"
                 required
                 value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Sua Mensagem"
               />
             </div>
