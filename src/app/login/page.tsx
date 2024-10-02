@@ -24,7 +24,7 @@ const Login = () => {
       <div className="flex w-full max-w-8xl items-center">
         <div className="w-1/2 h-screen hidden md:block">
           <img
-            src="/color-back.png"
+            src="/maax-background.jpg"
             alt="Login Illustration"
             className="w-5/5 h-full"
           />
