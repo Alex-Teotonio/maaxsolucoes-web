@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { About } from "@/components/About";
 
 export default function Home() {
   return (
-    <div className="bg-black text-white h-screen overflow-hidden flex flex-col">
+    <div className="bg-black text-white h-full overflow-hidden flex flex-col">
       <header className="bg-black text-white py-2 fixed top-0 left-0 w-full z-10">
         <div className="w-full px-4 flex justify-between items-center">
           <img src="/logo.jpg" className="w-20 h-30" />
@@ -19,6 +20,7 @@ export default function Home() {
       <div className="pt-12">
         <Separator className="my-3.5 bg-gray-600" />
       </div>
+
       <div className="grid grid-cols-2 h-screen">
         <div className="relative h-full flex justify-start items-start h-screen">
           <img
@@ -33,6 +35,7 @@ export default function Home() {
           </h3>
         </div>
       </div>
+      <About />
     </div>
   );
 }
