@@ -111,7 +111,7 @@ const Signup = () => {
               />
             </div>
             <div className="flex items-center justify-between">
-              <Button type="submit" className="w-full">
+              <Button type="submit" variant="secondary">
                 Cadastrar
               </Button>
               <Link href="/login" className="text-blue-500 hover:underline">
