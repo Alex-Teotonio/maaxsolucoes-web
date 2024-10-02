@@ -25,7 +25,7 @@ export default function Home() {
       <div className="grid grid-cols-2 h-screen">
         <div className="relative h-full flex justify-start items-start h-screen">
           <img
-            src="/maax-background.jpg"
+            src="/back.png"
             alt="Maax Soluções"
             className="h-screen w-fit object-contain"
           />

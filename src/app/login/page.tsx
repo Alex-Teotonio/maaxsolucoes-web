@@ -12,7 +12,6 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Fazer login com Firebase Authentication
       await signInWithEmailAndPassword(auth, email, password);
       console.log("Login realizado com sucesso");
     } catch (error) {
@@ -23,11 +22,11 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white w-full">
       <div className="flex w-full max-w-8xl items-center">
-        <div className="w-1/2 hidden md:block">
+        <div className="w-1/2 h-screen hidden md:block">
           <img
-            src="/card.png" // Substitua pelo caminho da sua imagem
+            src="/color-back.png"
             alt="Login Illustration"
-            className="w-4/5 h-auto mx-auto"
+            className="w-5/5 h-full"
           />
         </div>
 
