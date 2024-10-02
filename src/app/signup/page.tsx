@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, firestore } from "../../firebase-config";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -27,12 +28,28 @@ const Signup = () => {
     }
 
     try {
-      await createUserWithEmailAndPassword(
+      // Cria o usuário no Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
-      console.log("Usuário cadastrado com sucesso");
+
+      const user = userCredential.user;
+
+      let role = "client";
+      if (
+        formData.email === "alexteotonio29@gmail.com" ||
+        formData.email === "mateus@gmail.com"
+      ) {
+        role = "admin";
+      }
+
+      await setDoc(doc(firestore, "users", user.uid), {
+        name: formData.name,
+        email: formData.email,
+        role: role,
+      });
     } catch (error) {
       console.error("Erro ao cadastrar o usuário:", error);
     }
