@@ -5,6 +5,7 @@ import { collection, addDoc } from "firebase/firestore"; // Importa funções do
 import { firestore } from "../firebase-config"; // Importa o Firestore inicializado
 import { Input } from "@/components/ui/input"; // Importa o Input do shadcn
 import { Textarea } from "@/components/ui/textarea"; // Importa o Textarea do shadcn
+import { Button } from "@/components/ui/button"; // Importa o Button do shadcn
 
 export const ContactForm: React.FC = () => {
   const [nome, setNome] = useState("");
@@ -51,7 +52,6 @@ export const ContactForm: React.FC = () => {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
-            {/* Input para o Nome */}
             <div>
               <label htmlFor="nome" className="sr-only">
                 Nome
@@ -66,8 +66,6 @@ export const ContactForm: React.FC = () => {
                 placeholder="Seu Nome"
               />
             </div>
-
-            {/* Input para o Email */}
             <div>
               <label htmlFor="email" className="sr-only">
                 E-mail
@@ -83,7 +81,6 @@ export const ContactForm: React.FC = () => {
               />
             </div>
 
-            {/* Input para o Telefone */}
             <div>
               <label htmlFor="telefone" className="sr-only">
                 Telefone
@@ -99,7 +96,6 @@ export const ContactForm: React.FC = () => {
               />
             </div>
 
-            {/* Textarea para Mensagem */}
             <div>
               <label htmlFor="mensagem" className="sr-only">
                 Mensagem
@@ -114,14 +110,10 @@ export const ContactForm: React.FC = () => {
               />
             </div>
           </div>
-
           <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
+            <Button variant="secondary" type="submit" className="w-full">
               Enviar Mensagem
-            </button>
+            </Button>
           </div>
         </form>
       </div>
