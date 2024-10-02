@@ -6,16 +6,24 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("Login realizado com sucesso");
+      toast({
+        title: "Login Efetuado com Sucesso!",
+        description: "Você será redirecionado para a página inicial",
+      });
+      router.push("/dashboard");
     } catch (error) {
       console.error("Erro ao fazer login:", error);
     }

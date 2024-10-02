@@ -6,7 +6,8 @@ import { auth } from "../../firebase-config";
 import { useRouter } from "next/navigation";
 import AdminDashboard from "@/components/AdminDashboard";
 import ClientDashboard from "@/components/ClientDashboard";
-import { getUserRole } from "@/utils/userRole"; // Função que busca o papel do usuário no DB
+import { getUserRole } from "@/utils/userRole";
+
 
 const Dashboard = () => {
   const router = useRouter();

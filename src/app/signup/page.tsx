@@ -7,6 +7,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth, firestore } from "../../firebase-config";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const router = useRouter();
+  const { toast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,7 +32,6 @@ const Signup = () => {
     }
 
     try {
-      // Cria o usuário no Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
@@ -44,7 +47,12 @@ const Signup = () => {
       ) {
         role = "admin";
       }
+      toast({
+        title: "Cadastro Efetuado!",
+        description: "Você será redirecionado para a página de Login",
+      });
 
+      router.push("/login");
       await setDoc(doc(firestore, "users", user.uid), {
         name: formData.name,
         email: formData.email,
