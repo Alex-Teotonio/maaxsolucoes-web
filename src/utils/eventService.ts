@@ -11,19 +11,7 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-
-export interface Event {
-  id: string;
-  nome: string;
-  descrição: string;
-  data: Date;
-  local: string;
-  imagem: string;
-  categoria: string;
-  criadorId: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { Event } from "@/types/Event"; // Ensure correct import path
 
 // Função para criar um evento
 export const createEvent = async (eventData: {
@@ -34,10 +22,11 @@ export const createEvent = async (eventData: {
   imagem: string;
   categoria: string;
   criadorId: string;
-}) => {
+}): Promise<string> => {
   try {
     const docRef = await addDoc(collection(firestore, "events"), {
       ...eventData,
+      data: Timestamp.fromDate(eventData.data), // Ensure 'data' is stored as Timestamp
       createdAt: Timestamp.fromDate(new Date()),
       updatedAt: Timestamp.fromDate(new Date()),
     });
@@ -49,14 +38,26 @@ export const createEvent = async (eventData: {
 };
 
 // Função para obter todos os eventos
-export const getAllEvents = async () => {
+export const getAllEvents = async (): Promise<Event[]> => {
   try {
     const q = query(collection(firestore, "events"), orderBy("data", "asc"));
     const querySnapshot = await getDocs(q);
-    const events = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const events: Event[] = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+
+      return {
+        id: doc.id,
+        nome: data.nome,
+        descrição: data.descrição,
+        data: data.data.toDate(), // Convert Timestamp to Date
+        local: data.local,
+        imagem: data.imagem,
+        categoria: data.categoria,
+        criadorId: data.criadorId,
+        createdAt: data.createdAt.toDate(), // Convert Timestamp to Date
+        updatedAt: data.updatedAt.toDate(), // Convert Timestamp to Date
+      };
+    });
     return events;
   } catch (error) {
     console.error("Erro ao obter eventos:", error);
@@ -75,11 +76,17 @@ export const updateEvent = async (
     imagem: string;
     categoria: string;
   }>
-) => {
+): Promise<void> => {
   try {
     const eventRef = doc(firestore, "events", eventId);
+    const formattedData: any = { ...updatedData };
+
+    if (updatedData.data) {
+      formattedData.data = Timestamp.fromDate(updatedData.data);
+    }
+
     await updateDoc(eventRef, {
-      ...updatedData,
+      ...formattedData,
       updatedAt: Timestamp.fromDate(new Date()),
     });
   } catch (error) {
@@ -89,7 +96,7 @@ export const updateEvent = async (
 };
 
 // Função para deletar um evento
-export const deleteEvent = async (eventId: string) => {
+export const deleteEvent = async (eventId: string): Promise<void> => {
   try {
     await deleteDoc(doc(firestore, "events", eventId));
   } catch (error) {
